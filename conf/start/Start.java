@@ -1,11 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.io.File;
-import java.lang.reflect.Field;
-
+import java.awt.Graphics;
 import net.minecraft.client.MinecraftApplet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Session;
@@ -25,20 +24,9 @@ public class Start
       var6.setPreferredSize(new Dimension(854, 480));
       var5.pack();
       var5.setLocationRelativeTo((Component)null);
-      Minecraft var7 = new Minecraft(var6, (MinecraftApplet)null, 854, 480, var3);
+      Minecraft var7 = new Minecraft(var6, new MinecraftAppletImpl(), 854, 480, var3);
       Thread var8 = new Thread(var7, "Minecraft main thread");
       var8.setPriority(10);
-      try
-      {
-          Field f = Minecraft.class.getDeclaredField("mcDataDir");
-          Field.setAccessible(new Field[] { f }, true);
-          f.set(var7, new File("."));
-      }
-      catch (Exception e)
-      {
-          e.printStackTrace();
-          return;
-      }
       var7.appletMode = false;
       var7.minecraftUri = "www.minecraft.net";
       if(var0 != null && var1 != null) {
